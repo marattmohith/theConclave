@@ -1,0 +1,33 @@
+
+h1{
+	color:black;
+	text-align: center;
+}
+
+h2 { 
+	text-align: center 
+}
+
+h3 { 
+	text-align: center 
+}
+
+
+body{
+    background-color: #F5FAFF;
+}
+
+hr {
+    height: 1px;
+    background-color:#555;
+}
+
+ul
+{
+    list-style-type: none;
+}
+
+#errorMsg{
+
+	color:red;
+}

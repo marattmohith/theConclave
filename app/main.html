@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">	
+	<meta name="description" content="Home Page">
+	<meta name="keywords" content="HTML,COMP431,COMP531,JavaScript">
+	<meta name="author" content="Mohith Zacharias Maratt">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Conclave Home</title>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.js"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.	com/ajax/libs/angular.js/1.4.6/angular-route.min.js"></script>  
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-resource.min.js"></script> 
+
+  	<script src="script.js"></script>
+	<script src="resource.js"></script>
+    <script src="controller.js"></script>
+    <script src="mainPageTabs/userProfile.js"></script>
+    <script src="mainPageTabs/userPosts.js"></script>
+
+	<!--<script src="main.js"></script>-->
+	<link rel = "stylesheet" href = "..\css\main.css"></link>
+	<link rel = "stylesheet" href = "..\css\common.css"></link>
+	
+</head>
+<body ng-app = "conclaveModule" ng-controller = "conclaveCtrl as vm">
+	<div id="upperbar">
+		<div id = "logo">
+			<img src = "..\\conclave_logo01.jpg" height="130" width="416";></img>
+		</div>
+		<nav class="navbar navbar-inverse" data-offset-top="197">
+		  <ul class="nav navbar-nav">
+		    <li class="active"><a href="#posts">Home</a></li>
+		    <li><a href="#profile">Profile</a></li>
+		    <li><a href="#posts">Settings</a></li>
+		    <li><input type="button" value="Logout"  class="btn btn-primary" ng-click='vm.logout()'/></li>
+		  </ul>
+		</nav>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+		    <div class="col-sm-3" style="background-color:lavender;">
+				<div class="row">
+					<div class="col-sm-3">
+						<span id = "postAuthor">{{username}}</span>
+						<img ng-src={{profilePicture}} id="profilePicture" width="200" height="200"/>
+					</div>
+				</div>		  
+				<hr/>
+
+				<div id = "userStatus">
+					<br/><br/>
+					<span id = "statusStyle">Status:</span><p id ="myStatus">{{message}}</p>
+					<br/>
+					New Status: <input id = "updatedStatus" type="text" placeholder ="What's up?" ng-model = "editedStatus">
+					<br/><br/>
+					<button class="btn btn-primary btn-xs" ng-click="editStatusFunc()">Update</button>
+					<br/><br/><br/>
+					
+				</div>
+				<hr/>
+				<div id = "applications">
+						<p>Applications</p>
+						<p>Groups</p>
+						<p>Achievements</p>
+						<p>Games</p>
+				</div>
+			</div>
+			
+			<div ng-view></div>
+			
+			<div class="col-sm-3" style="background-color:lavender;">
+				<div id = "contacts">
+					<h3>Contacts</h3>
+					<ul>
+						<li ng-repeat="z in followers">
+							<div class="row">
+								<a href="#" title={{z}} data-toggle="popover" data-placement="auto" data-trigger="hover" data-content="{{}}">
+									<img ng-src="//www.gravatar.com/avatar/b9547066abc69c1d7332c9f28858a6b8?d=mm&s=100" max-width="50" max-height="50"/> <br/>
+									{{z}}
+									
+									<br/>
+								 </a>
+								<br/>
+							</div>
+						</li>
+					</ul>
+					<span id = "addUser"></span>
+					<input type = "text" id = "addUsername" placeholder="Username" ng-model="addUsername">
+					<button type="button" class="btn btn-primary" ng-click="putFollowing()">Add User</button><br/>
+
+					<span id = "addUser"></span>
+					<input type = "text" id = "removeUser" placeholder="Username">
+					<button type="button" class="btn btn-danger" ng-click="deleteFollowingUser()">Remove User</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>

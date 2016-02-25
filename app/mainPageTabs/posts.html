@@ -1,0 +1,90 @@
+<div class="col-sm-6">
+				<div id = "mainBlock">
+					<div class="panel panel-default">
+		    			<div class="panel-heading" id = "addPost">
+		    				&nbsp &nbsp &nbsp &nbsp
+		    				<input type="text" ng-model="addPostContent" placeholder="Start a conversation!" name = "addPostContent" id = "addPostContent">
+		    				<button class="btn btn-success" type="button" ng-click="publishPost()">
+		    					<span class="glyphicon glyphicon-envelope"></span> Post
+		    				</button>
+		    				<button type="button" class="btn btn-default" ng-click="clearAddPost()">Clear</button>
+		    				<input type="file" accept="image/*" onchange="angular.element(this).scope().setFile(this)">
+		    				
+		    			</div>
+		  			</div>
+
+					<div class="panel panel-default">
+		    			<div class="panel-heading" id = "searchPanel">
+		    				&nbsp &nbsp &nbsp &nbsp
+		    				<input type="text" ng-model="postSearch" placeholder="Search posts" name = "searchPost" id = "searchPostValue">
+		    				<button class="btn btn-success" type="button">
+		    					<span class="glyphicon glyphicon-search"></span> Search
+		    				</button>
+		    				<button type="button" class="btn btn-default" ng-click="clearSearch()">Clear</button>
+		    				
+		    			</div>
+		  			</div>
+
+		  			<div id = "newsFeed">
+						<ul>
+						<li ng-repeat="x in mainPosts  | filter:postSearch">
+						<div id = "postP" ng-if="x.body">
+						<div id = "post">
+							<div class="row">
+								<div class="col-sm-2">
+								 <img ng-src="//www.gravatar.com/avatar/b9547066abc69c1d7332c9f28858a6b8?d=mm&s=100" width="50" height="50" class="img-rounded" alt="Profile Picture"/>
+								</div> 
+								<div class="col-sm-4">
+									<span style="font-weight: bold;" id = "postAuthor">{{x.author}}</span>
+									<br/>
+									<span id = "postTime">{{x.date | date : 'M/d/yy h:mm a'}}</span>
+								</div>
+							</div>
+							<div class="row">
+								<div id = "postP" ng-if="x.body">
+								&nbsp &nbsp 
+								<span id ="postBody">{{x.body}}</span>
+								</div>
+								<br/>
+								<div id = "postImage" ng-if="x.img">
+									<span id ="postImage"><img ng-src = {{x.img}} width = "200" height = "auto"></img></span>
+								</div>
+								<br/>
+							</div>
+							
+							<button class="btn btn-primary btn-xs" ng-click="isCollapsed = !isCollapsed">Show Hide Comments</button>
+							<div collapse="isCollapsed">
+								<div ng-show="!isCollapsed" class="panel-body ">
+								<ul>
+										<li ng-repeat="y in x.comments">
+											<div class="row">
+												<span id = "commentAuthor">{{y.author}}</span>
+
+											 	&nbsp &nbsp &nbsp 
+											 	<span id = "commentTime">{{y.date | date : 'M/d/yy h:mm a'}}</span>
+											 	<br/>
+											 	<div id = "commentImage" ng-if="y.img">
+													<span id ="commentImage"><img ng-src = {{y.img}} width = "200" height = "120"></img></span>
+												</div>
+												{{y.body}} 
+												<br/><br/>
+											</div>
+										</li>
+								</ul>
+								<br/>
+									<input type="text" ng-model="addPostComment" placeholder="Comment" name = "addPostComment" id = "addPostComment">
+							  		<button class="btn btn-primary btn-xs" type="button" onclick="addPostComment()">
+							  			Comment
+							  		</button>
+								</div>
+							</div>
+						</div>
+						</div>
+						<br/><br/>
+						</li>
+						</ul>
+					</div>
+
+
+				</div>
+			</div>

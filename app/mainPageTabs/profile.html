@@ -1,0 +1,109 @@
+<div class="col-sm-6">
+	<div class="container">
+	  <h3>Profile Details</h3>
+	  <br/><br/>
+            
+	  <table class="table table-hover">
+	    <thead>
+	      <tr>
+	        <td>Name</td>
+	        <td>{{profileName}}</td>
+	        <td>
+		        
+      		</td>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	        <td>Email</td>
+	        <td>{{profileEmail}}</td>
+	        <td>
+		        <button class="btn" ng-click="editUser()">
+		          <span class="glyphicon glyphicon-pencil"></span>  Edit
+		        </button>
+      		</td>
+	      </tr>
+	      <tr>
+	        <td>Password</td>
+	        <td>***</td>
+	        <td>
+		        <button class="btn" ng-click="editUser()">
+		          <span class="glyphicon glyphicon-pencil"></span>  Edit
+		        </button>
+      		</td>
+	      </tr>
+	      <tr>
+	        <td>Status</td>
+	        <td>{{profileStatus}}</td>
+	        <td>
+		        
+      		</td>
+	      </tr>
+	      <tr>
+	        <td>Picture</td>
+	        <td>
+	        	<img ng-src={{profilePicture}} width="100" height="100"/>
+	        </td>
+	        <td>
+		        <button class="btn" ng-click="editUser()">
+		          <span class="glyphicon glyphicon-pencil"></span>  Edit
+		        </button>
+      		</td>
+	      </tr>
+	      <tr>
+	        <td>Zipcode</td>
+	        <td>{{profileZipcode}}</td>
+	        <td>
+		        <button class="btn" ng-click="editUser()">
+		          <span class="glyphicon glyphicon-pencil"></span>  Edit
+		        </button>
+      		</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+
+	<br/><hr/><br/>
+
+	<div ng-hide="edit">
+	<h3>Edit User</h3><br/>
+	<br/>
+	  <br/>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">Email:</label>
+	    <div class="col-sm-10">
+	    <input type="text" ng-model="emailChange" placeholder="email">
+	    </div>
+	  </div>
+	  <br/>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">Zipcode:</label>
+	    <div class="col-sm-10">
+	    <input type="text" ng-model="zipcodeChange" placeholder="zipcode">
+	    </div>
+	  </div>
+	  <br/>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">Password:</label>
+	    <div class="col-sm-10">
+	    <input type="text" ng-model="passwordChange" placeholder="What's up?">
+	    </div>
+	  </div>
+	  <br/>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">Picture:</label>
+	    <div class="col-sm-10">
+		   <!--<input type="file" accept="image/*" onchange="angular.element(this).scope().vm.setFile(this)">-->
+	    </div>
+	  </div>
+	  <br/>
+
+	<button class="btn btn-success" ng-click="updateUserProfile()">
+		<span class="glyphicon glyphicon-save"></span> Save
+	</button>	
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	</div>	
+</div>

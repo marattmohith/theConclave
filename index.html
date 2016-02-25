@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en-US" ng-app="conclaveModule">
+<head>
+	<meta charset="UTF-8">	
+	<meta name="description" content="Sigin Page">
+	<meta name="keywords" content="HTML,COMP431,COMP531,JavaScript">
+	<meta name="author" content="Mohith Zacharias Maratt">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Conclave Login</title>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.js"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-route.min.js"></script>  
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-resource.min.js"></script> 
+	
+	<script src="app\script.js"></script>
+	<script src="app\resource.js"></script>
+    <script src="app\controller.js"></script>
+  	
+	<link rel = "stylesheet" href = "css\landing.css"></link>
+	<link rel = "stylesheet" href = "css\common.css"></link>
+
+</head>
+
+<body ng-controller="conclaveCtrl as vm">
+	<div id = "logo">
+		<img src = "conclave_logo01.jpg" height="130" width="416";></img>
+	</div>
+	<h2>Connect with like minded people around the world</h2>
+	<hr></hr>
+	</br>
+
+	<div class="container" ng-show = "toggleRegStatus">
+		
+	    <H3>Login</H3>
+		<br/>
+		<div class="form-group">
+		  	<label class="control-label col-sm-2" for="email">Username:</label>
+		    <div class="col-sm-10">
+		    	<input type="text" ng-model='usernameLogin' placeholder="username" required name = "usernameLogin" id = "usernameLogin">
+		    	<span style="color:red" ng-show="signInForm.eMail.$dirty && signInForm.eMail.$invalid">
+				<span ng-show="signInForm.eMail.$error.required">Username is required.</span>
+				</span>
+		    </div>
+	  	</div> 
+		<div class="form-group">
+		    <label class="col-sm-2 control-label">Password:</label>
+		    <div class="col-sm-10">
+		    	<input type="password" ng-model='password' placeholder="password" required name = "pwd" id = "pwd">
+		    	<span style="color:red" ng-show="signInForm.pwd.$dirty && signInForm.pwd.$invalid">
+				<span ng-show="signInForm.pwd.$error.required">Password is required.</span>
+				</span>
+			</div>
+	    </div>
+		<br/>
+		<div class="form-group">        
+      		<div class="col-sm-offset-2 col-sm-10">
+      			<br/>
+				<input type="button" value="Login"  class="btn btn-primary" ng-click='vm.login()'/>
+				<input type="button" value="Clear"  class="btn btn-primary" onclick = "signInFormClear()"/>
+			</div>
+			<span id = "errorMsg">{{messageLogin}}</span>
+		</div>
+		<div class="container" ng-hide = "toggleRegStatus">
+			<span id = "errorMsg">Email and password required!</span>
+		</div>
+
+		<br/>
+		<br/>
+		<h5> <br/> <br/>Sign Up? &nbsp
+			<button class="btn btn-success"  ng-click="toggleReg()">
+			<span class="glyphicon glyphicon-user"></span>  Sign Up
+			</button>
+		</h5>
+	</div>
+	
+	<div class="container" ng-hide = "toggleRegStatus">
+	<h3> Registration Form</h3>
+	<form class="form-horizontal" method = "post" id = "registrationForm" name = "registrationForm"  role="form">
+	  <div class="form-group">
+	  	<label class="control-label col-sm-2" for="user_name">Username:</label>
+	    <div class="col-sm-10">
+	    <input type="text" ng-model="user_name" placeholder="Username" required name = "user_name" id = "user_name">
+	    <span style="color:red" ng-show="registrationForm.user_name.$dirty && registrationForm.user_name.$invalid">
+		<span ng-show="registrationForm.user_name.$error.required">Username is required.</span>
+		</span>
+	    </div>
+	  </div> 
+	  <div class="form-group">
+		<label class="control-label col-sm-2" for="email">Email:</label>
+		 <div class="col-sm-10">
+		 <input type="email" ng-model="eMail" placeholder="abc@xyz.com" required name = "eMail" id = "eMail">
+		 <span style="color:red" ng-show="registrationForm.eMail.$dirty && registrationForm.eMail.$invalid">
+		<span ng-show="registrationForm.eMail.$error.required">Email is required.</span>
+		</span>
+		</div>
+	  </div> 
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">Password:</label>
+	    <div class="col-sm-10">
+	    <input type="password" ng-model="passw1" placeholder="Password" required name ="passw1" id = "passw1">
+	    <span style="color:red" ng-show="registrationForm.passw1.$dirty && registrationForm.passw1.$invalid">
+		<span ng-show="registrationForm.passw1.$error.required">Password name is required.</span>
+		</span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">Repeat Password:</label>
+	    <div class="col-sm-10">
+	    <input type="password" ng-model="passw2" placeholder="Repeat Password" required name = "passw2" onkeyup="checkPass(); return false;" id = "passw2">
+	    <span id = "messagePass" ></span>
+	    <span style="color:red" ng-show="registrationForm.passw2.$dirty && registrationForm.passw2.$invalid">
+		<span ng-show="registrationForm.passw2.$error.required">Password name is required.</span>
+		</span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">Zipcode:</label>
+	    <div class="col-sm-10">
+	    <input type="text" ng-model="zipcode" placeholder="xxxxx" required name = "zipcode" id = "zipcode" onkeyup="checkPassZip(); return false;">
+	    <span id = "errorMsg">
+	    <span id = "zipcodePass" ></span>
+	    </span>
+	    <span style="color:red" ng-show="registrationForm.zipcode.$dirty && registrationForm.zipcode.$invalid">
+		<span ng-show="registrationForm.zipcode.$error.required">Zipcode name is required.</span>
+		</span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="col-sm-2 control-label">Sex:</label>
+	    <div class="col-sm-10">
+	    	<div class="radio" required>
+		  	<label><input type="radio" name="sex" required name ="sex">Male</label>
+			</div>
+		</div>
+		<label class="col-sm-2 control-label"></label>
+		<div class="col-sm-10">
+			<div class="radio">
+		 	<label><input type="radio" name="sex" required>Female</label>
+			</div>
+		</div>
+		<label class="col-sm-2 control-label"></label>
+		<div class="col-sm-10">
+			<div class="radio">
+			<label><input type="radio" name="sex" required>None</label>
+			</div>
+		</div>
+	</div>
+	  <div class="form-group">        
+      	<div class="col-sm-offset-2 col-sm-10" type="button">
+		    <button class="btn btn-success" ng-click="vm.register()">
+			<span class="glyphicon glyphicon-user"></span>  Create New User
+			</button>
+			<input type="button" value="Clear"  class="btn btn-primary" onclick = "registrationFormClear()"/>
+		</div>
+		<span id = "errorMsg">{{messageRegister}}</span>
+	  </div>
+	  <div class="container" ng-hide = "toggleCreateAccountStatus">
+	  	<span id = "errorMsg"/>
+	  </div>
+	</form>
+	<br/>
+	<h5>If already registered &nbsp<input type="button" value="Login"  class="btn btn-primary" ng-click="toggleReg()"/></h5>
+	</div>
+	
+	
+	<br></br>
+	<hr></hr>
+	<h3>You're search is over. The Conclave. The ultimate social hub!</h3><br/>
+	<h3>Here is a preview of the your Home Page!</h3>
+	<hr/>
+	<div class="col-sm-3">
+	</div>	
+	<div class="col-sm-6">
+	<div id = "newsFeed">
+	<ul>
+	<li ng-repeat="x in samplePosts">
+	<div id = "postP" ng-if="x.body">
+	<div id = "post">
+		<div class="row">
+			<div class="col-sm-2">
+			 <img ng-src="//www.gravatar.com/avatar/b9547066abc69c1d7332c9f28858a6b8?d=mm&s=100" max-width="50" max-height="50" class="img-rounded" alt="Profile Picture"/>
+			</div> 
+			<div class="col-sm-4">
+				<span style="font-weight: bold; color: blue;" id = "postAuthor">{{x.author}}</span>
+				<br/>
+				<span id = "postTime">{{x.date | date : 'M/d/yy h:mm a'}}</span>
+			</div>
+		</div>
+		<div class="row">
+			<div id = "postP" ng-if="x.body">
+			&nbsp &nbsp 
+			<span id ="postBody">{{x.body}}</span>
+			</div>
+			<br/>
+			<div id = "postImage" ng-if="x.img">
+				<span id ="postImage"><img ng-src = {{x.img}} max-width = "200" max-height = "120"></img></span>
+			</div>
+			<br/>
+		</div>
+		
+		<button class="btn btn-primary btn-xs" ng-click="isCollapsed = !isCollapsed">Show Hide Comments</button>
+		<div collapse="isCollapsed">
+			<div ng-show="!isCollapsed" class="panel-body ">
+			<ul>
+					<li ng-repeat="y in x.comments">
+						<div class="row">
+							<span  style="font-weight: bold; color: blue;" id = "commentAuthor">{{y.author}}</span>
+						 	&nbsp &nbsp &nbsp 
+						 	<span id = "commentTime">{{y.date | date : 'M/d/yy h:mm a'}}</span>
+						 	<br/>
+						 	<div id = "commentImage" ng-if="y.img">
+								<span id ="commentImage"><img ng-src = {{y.img}} width = "200" height = "120"></img></span>
+							</div>
+							{{y.body}} 
+							<br/><br/>
+						</div>
+					</li>
+					
+			</ul>
+			<br/>
+				<input type="text" ng-model="addPostComment" placeholder="Comment" name = "addPostComment" id = "addPostComment">
+			<button class="btn btn-primary btn-xs" type="button" onclick="addPostComment()">
+							  			Comment
+			</button>
+			</div>
+		</div>
+	</div>
+	</div>
+	<br/><br/>
+	</li>
+	</ul>
+	</div>
+	</div>
+	<div class="col-sm-3">
+	</div>
+	
+</body>
+<script src="index.js"></script>
+</html>
